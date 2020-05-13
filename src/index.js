@@ -7,7 +7,7 @@ import logo from '@/assets/webpack-logo.png'
 import './css/styles.css'
 
 const post = new Post(`Webpack post title`, logo)
-$('pre').html(post.toString())
+$('pre').addClass('code').html(post.toString())
 
 // console.log(`JSON: ${json}`)
 // console.log(`XML: ${xml}`)
