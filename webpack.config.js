@@ -9,6 +9,13 @@ module.exports = {
         main: './index.js',
         analytics: './analytics.js'
     },
+    resolve: {
+        extensions: ['.js', '.png', '.json'],
+        alias: {
+            '@models': path.resolve(__dirname, './src/models'),
+            '@': path.resolve(__dirname, './src')
+        }
+    },
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist')

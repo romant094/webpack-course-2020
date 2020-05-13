@@ -1,5 +1,5 @@
-import Post from './post'
-import logo from './assets/webpack-logo.png'
+import Post from '@models/post'
+import logo from '@/assets/webpack-logo.png'
 // import json from './assets/json'
 // import xml from './assets/data.xml'
 // import csv from './assets/data.csv'
