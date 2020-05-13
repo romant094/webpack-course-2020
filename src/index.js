@@ -1,4 +1,5 @@
 import Post from "./post";
+import './css/styles.css';
 
 const post = new Post('Webpack post title');
 
