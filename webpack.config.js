@@ -16,6 +16,11 @@ module.exports = {
             '@': path.resolve(__dirname, './src')
         }
     },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist')

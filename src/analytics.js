@@ -1,11 +1,16 @@
+import * as $ from 'jquery'
+
 function createAnalytics() {
     let counter = 0;
     let isDestroyed = false;
+
     const increaseCounter = () => counter++;
-    document.addEventListener('click', increaseCounter);
+
+    $(document).on('click', increaseCounter);
+
     return {
         destroy(){
-            document.removeEventListener('click', increaseCounter);
+            $(document).off('click', increaseCounter);
             isDestroyed = true;
         },
         getClicks(){
