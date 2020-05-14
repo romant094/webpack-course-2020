@@ -5,6 +5,8 @@ import logo from '@/assets/webpack-logo.png'
 // import xml from './assets/data.xml'
 // import csv from './assets/data.csv'
 import './css/styles.css'
+import './css/less.less'
+import './css/scss.scss'
 
 const post = new Post(`Webpack post title`, logo)
 $('pre').addClass('code').html(post.toString())

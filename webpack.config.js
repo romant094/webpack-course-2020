@@ -8,8 +8,6 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
-console.log(isDev)
-console.log(isProd)
 const optimization = () => {
     const config = {
         splitChunks: {
@@ -17,14 +15,31 @@ const optimization = () => {
         }
     };
 
-    if (isProd){
-        config.minimizer=[
+    if (isProd) {
+        config.minimizer = [
             new OptimizeCssAssetsWebpackPlugin(),
             new TerserWebpackPlugin()
         ]
     }
 
     return config
+}
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+
+const cssLoaders = loader => {
+    const loaders = [
+        {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+                hmr: isDev,
+                reloadAll: true
+            }
+        },
+        'css-loader'
+    ]
+    if (loader) loaders.push(loader)
+    return loaders
 }
 
 module.exports = {
@@ -47,7 +62,7 @@ module.exports = {
         hot: isDev
     },
     output: {
-        filename: '[name].[contenthash].js',
+        filename: filename('js'),
         path: path.resolve(__dirname, 'dist')
     },
     plugins: [
@@ -65,20 +80,22 @@ module.exports = {
             }
         ]),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css'
+            filename: filename('css')
         })
     ],
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                        hmr: isDev,
-                        reloadAll: true
-                    },
-                }, 'css-loader']
+                use: cssLoaders()
+            },
+            {
+                test: /\.less$/,
+                use: cssLoaders('less-loader')
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use: cssLoaders('sass-loader')
             },
             {
                 test: /\.(png|jpeg|svg|gif)$/,
