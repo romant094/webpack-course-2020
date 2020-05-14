@@ -1,23 +1,23 @@
 import * as $ from 'jquery'
 
-function createAnalytics() {
+function createAnalytics(): object {
     let counter = 0;
-    let isDestroyed = false;
+    let isDestroyed: boolean = false;
 
-    const increaseCounter = () => counter++;
+    const increaseCounter = (): number => counter++;
 
     $(document).on('click', increaseCounter);
 
     return {
-        destroy(){
+        destroy() {
             $(document).off('click', increaseCounter);
             isDestroyed = true;
         },
-        getClicks(){
+        getClicks() {
             if (isDestroyed) return 'Analytics is destroyed'
             return counter
         }
     }
 }
 
-window.analytics = createAnalytics();
+window['analytics'] = createAnalytics();
