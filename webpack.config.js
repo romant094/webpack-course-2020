@@ -81,6 +81,7 @@ module.exports = {
         port: 4200,
         hot: isDev
     },
+    devtool: isDev ? 'source-map' : '',
     output: {
         filename: filename('js'),
         path: path.resolve(__dirname, 'dist')
